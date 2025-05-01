@@ -25,7 +25,17 @@ function showException(error) {
 }
 
 function showAddress(latitude, longitude) {
-    const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
+
+    // latitude = 52.520645;
+    // longitude = 13.409779;
+
+    latitude = 52.52089;
+    longitude = 13.40943;
+
+    // const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
+    const url = `https://nominatim.openstreetmap.org/reverse.php?lat=${latitude}&lon=${longitude}&zoom=18&format=jsonv2`;
+    console.log(url);
+    // const url = `https://nominatim.openstreetmap.org/reverse.php?lat=52.52089&lon=13.40943&zoom=18&format=jsonv2`
 
     fetch(url, {
       headers: {
@@ -37,6 +47,8 @@ function showAddress(latitude, longitude) {
     //   console.log(dados);
     //   alert("Você está em: " + dados.address.city + ", " + dados.address.country);
     
+    console.log(dados);
+
     document.getElementById("ISO3166-2-lvl4").innerText = dados.address["ISO3166-2-lvl4"];
     document.getElementById("tourism").innerText = dados.address.tourism;
     document.getElementById("suburb").innerText = dados.address.suburb;
@@ -49,6 +61,7 @@ function showAddress(latitude, longitude) {
     document.getElementById("country_code").innerText = dados.address.country_code;
     document.getElementById("country").innerText = dados.address.country;
     document.getElementById("city").innerText = dados.address.city;
+    document.getElementById("house_number").innerText = dados.address.house_number || 'n/a';
 
 
     })
