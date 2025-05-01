@@ -71,11 +71,11 @@
         return distanciaKm;
     }
 
-    window.onload = () => {
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(showPosition, showException);
         } else {
             console.error("Geolocalização não é suportada pelo seu navegador.");
         }
-    }
+
 </script>
