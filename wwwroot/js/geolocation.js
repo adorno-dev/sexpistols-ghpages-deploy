@@ -29,8 +29,8 @@ function showAddress(latitude, longitude) {
     // latitude = 52.520645;
     // longitude = 13.409779;
 
-    latitude = 52.52089;
-    longitude = 13.40943;
+    // latitude = 52.52089;
+    // longitude = 13.40943;
 
     // const url = `https://nominatim.openstreetmap.org/reverse?lat=${latitude}&lon=${longitude}&format=json`;
     const url = `https://nominatim.openstreetmap.org/reverse.php?lat=${latitude}&lon=${longitude}&zoom=18&format=jsonv2`;
