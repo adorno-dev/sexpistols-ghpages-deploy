@@ -1,0 +1,15 @@
+span#geolocation {
+    display: inline-block;
+    background: rgb(50, 50, 50);
+    border: 1px solid orange;
+    margin: 10px;
+    padding: 10px;
+}
+
+span#address {
+    display: inline-block;
+    background: rgb(50, 50, 50);
+    border: 1px solid lightgreen;
+    margin: 10px;
+    padding: 10px;
+}

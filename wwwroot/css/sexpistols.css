@@ -1,0 +1,14 @@
+* {
+    font-family: "Consolas NF";
+    margin: 0;
+    padding: 0;
+}
+
+b {
+    color: darkgray;
+}
+
+html {
+    background: #000;
+    color: #fff;
+}

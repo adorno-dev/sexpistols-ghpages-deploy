@@ -1,5 +1,4 @@
 function showPosition(position) {
-    console.info(position.coords);
 
     document.getElementById("latitude").innerText = position.coords.latitude;
     document.getElementById("longitude").innerText = position.coords.longitude;
@@ -35,8 +34,23 @@ function showAddress(latitude, longitude) {
     })
     .then(resposta => resposta.json())
     .then(dados => {
-      console.log(dados);
+    //   console.log(dados);
     //   alert("Você está em: " + dados.address.city + ", " + dados.address.country);
+    
+    document.getElementById("ISO3166-2-lvl4").innerText = dados.address["ISO3166-2-lvl4"];
+    document.getElementById("tourism").innerText = dados.address.tourism;
+    document.getElementById("suburb").innerText = dados.address.suburb;
+    document.getElementById("state").innerText = dados.address.state;
+    document.getElementById("road").innerText = dados.address.road;
+    document.getElementById("region").innerText = dados.address.region;
+    document.getElementById("postcode").innerText = dados.address.postcode;
+    document.getElementById("municipality").innerText = dados.address.municipality;
+    document.getElementById("county").innerText = dados.address.county;
+    document.getElementById("country_code").innerText = dados.address.country_code;
+    document.getElementById("country").innerText = dados.address.country;
+    document.getElementById("city").innerText = dados.address.city;
+
+
     })
     .catch(erro => {
       console.error("Erro ao buscar endereço:", erro);
@@ -62,10 +76,41 @@ function showDistance(latitude1, longitude1, latitude2, longitude2) {
     return distanciaKm;
 }
 
-window.onload = () => {
+function getGeolocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition, showException);
     } else {
         console.error("Geolocalização não é suportada pelo seu navegador.");
     }
 }
+
+window.getGeolocation2 = function(dotnetHelper) {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const {latitude, longitude, accuracy} = position.coords;
+                const geolocation = { ...{latitude, longitude, accuracy}};
+                dotnetHelper.invokeMethodAsync("geolocation", geolocation);
+            }, 
+            (error) => {
+                switch (error.code) {
+                    case error.PERMISSION_DENIED:
+                        console.error("Usuário negou a solicitação de geolocalização.");
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        console.error("As informações de localização não estão disponíveis.");
+                        break;
+                    case error.TIMEOUT:
+                        console.error("A solicitação para obter a localização expirou.");
+                        break;
+                    case error.UNKNOWN_ERROR:
+                        console.error("Ocorreu um erro desconhecido.");
+                        break;
+                }
+            });
+    } else {
+        console.error("Geolocalização não é suportada pelo seu navegador.");
+    }
+}
+
+getGeolocation();
